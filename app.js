@@ -171,35 +171,36 @@ function response_mqtt (rsp_topic, rsc, to, fr, rqi, inpcs) {
 
 
 function init_resource(){
-        let path = conf.ae.parent + '/' + conf.ae.name+'/'+ conf.cnt.name +'/' + 'config';
-        let sub_body = {nu:['mqtt://' + conf.cse.host +'/'+ conf.noti.id + '?ct=json']};
-        let sub_obj = {
-            'm2m:sub':
-                {
-                    'rn' : "sub_ipe",
-                    'enc': {'net': [1,3]},
-                    'nu' : sub_body.nu,
-                    'nct': 1,
-                    'exc': 0 
-                }
-        };
-        let sub_path = path +'/'+"sub_ipe";
-        let resp_sub = wdc_base.retrieve_sub(sub_path);
-        if (resp_sub.code == 200) {
-            resp_sub = wdc_base.delete_res(sub_path);
-            if (resp_sub.code == 200) {
-                resp_sub = wdc_base.create_sub(path, sub_obj);
+    let path = conf.ae.parent + '/' + conf.ae.name+'/'+ conf.cnt.name +'/' + conf.cnt.flexsub; //flex_sub path
+    let sub_body = {nu:['mqtt://' + conf.cse.host +'/'+ conf.noti.id + '?ct=json']};
+    let sub_obj = {
+        'm2m:sub':
+            {
+                'rn' : "sub_ipe",
+                'enc': {'net': [1,3]},
+                'nu' : sub_body.nu,
+                'nct': 1,
+                'exc': 0 
             }
+    };
+    let sub_path = path +'/'+"sub_ipe";
+    let resp_sub = wdc_base.retrieve_sub(sub_path);
+    if (resp_sub.code == 200) {
+        resp_sub = wdc_base.delete_res(sub_path);
+        if (resp_sub.code == 200) {
+            resp_sub = wdc_base.create_sub(path, sub_obj);
         }
-        else if (resp_sub.code == 404) {
-            wdc_base.create_sub(path, sub_obj);
-        }
-        if(resp_sub.code == 201 || resp_sub.code == 409){
-           console.log("SUB_Complete!!");
-        }
-    
-    init_mqtt_client();
+    }
+    else if (resp_sub.code == 404) {
+        wdc_base.create_sub(path, sub_obj);
+    }
+    if(resp_sub.code == 201 || resp_sub.code == 409){
+       console.log("SUB_Complete!!");
+    }
+
+init_mqtt_client();
 }
+
 
 function parse_sgn(rqi, pc, callback) {
     if(pc.sgn) {
