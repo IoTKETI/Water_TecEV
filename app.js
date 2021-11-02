@@ -11,12 +11,12 @@ var wdc_base = new wdc();
 var event = new events.EventEmitter();
 wdc_base.set_wdc_info(conf.cse.host,conf.cse.port,conf.ae.id);
 
-var waterPortNum = '/dev/ttyUSB0';
-var waterBaudrate = '9600';
+var waterPortNum = '/dev/ttyUSB0'; //serial port
+var waterBaudrate = '9600';  //serial baudrate
 global.waterPort = null;
 waterPortOpening();
 
-var delay = 5000;
+var delay = 5000; //request time to oneM2M platform
 var reprtActvty=true;
 
 function waterPortOpening() {
@@ -63,7 +63,7 @@ function waterPortError(error) {
 
 var str = '';
 var value_data ='';
-function waterPortData(data) {
+function waterPortData(data) {  //serial data read
     str += data.toString('hex');
     let stx = str.substring(0,2);
     if(stx === '20'){
@@ -80,7 +80,7 @@ function waterPortData(data) {
 }
 
 var timerId = '';
-function interval_upload(delay){
+function interval_upload(delay){ // send update request to oneM2M platform
 
     var cnt_path = conf.ae.parent + '/' + conf.ae.name + '/' + conf.cnt.name+ '/' +conf.cnt.flexcnt;
     timerId = setInterval(function(){
@@ -95,7 +95,6 @@ function interval_upload(delay){
         console.log(resp);
       }
   },delay);
-
 }
 
 
