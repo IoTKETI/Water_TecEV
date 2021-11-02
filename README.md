@@ -45,7 +45,7 @@ ae.id = "SM";                  //AE ID
 ae.parent = "/" + cse.name;
 ae.appid = "kwater-poc"
 
-cnt.name = 'sensor1';          //CNT NAME
+cnt.name = 'sensor2';          //CNT NAME
 cnt.flexcnt = 'WtqltGnrlMesureIem';  // FLEX CNT NAME
 cnt.flexsub = 'WtqltMesureSetup';    // FLEX SUBSCRIPTION NAME
 
