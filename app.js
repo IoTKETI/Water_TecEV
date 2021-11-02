@@ -16,7 +16,7 @@ var waterBaudrate = '9600';  //serial baudrate
 global.waterPort = null;
 waterPortOpening();
 
-var delay = 5000; //request time to oneM2M platform
+var delay = 5000; //default request time to oneM2M platform
 var reprtActvty=true;
 
 function waterPortOpening() {
