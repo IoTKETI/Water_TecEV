@@ -63,7 +63,7 @@ module.exports = conf;
 ```
 var waterPortNum = '/dev/ttyUSB0';         // SERIAL PORT
 var waterBaudrate = '9600';      // SERIAL BAUDRATE
-var delay = 5000;                // Upload time to oneM2M platform 
+var delay = 5000;                // Request time to oneM2M platform 
 
 ```
 
